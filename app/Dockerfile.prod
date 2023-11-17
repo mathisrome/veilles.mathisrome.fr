@@ -1,0 +1,15 @@
+FROM node:20.7-alpine as build
+
+RUN apk update && apk add curl git zip
+ADD --chown=node:node build.tar.gz /home/node
+
+WORKDIR /home/node/app
+
+RUN npm install && \
+    npm run build && \
+    rm -Rf node_modules
+
+FROM nginx:1.25 as final
+
+## Copie des sources
+COPY --chown=www-data:www-data --from=build /home/node/app/build /var/www/app

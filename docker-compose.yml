@@ -1,0 +1,10 @@
+services:
+  node:
+    image: node:20.7
+    working_dir: "/home/node/app"
+    user: node
+    volumes:
+      - ./app:/home/node/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm start -- --port 3000 --host 0.0.0.0"

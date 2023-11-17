@@ -1,0 +1,7 @@
+services:
+  nginx:
+    image: mathisrome/veilles-mathisrome-fr
+    volumes:
+      - ./infra/nginx/prod/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "3000:3000"

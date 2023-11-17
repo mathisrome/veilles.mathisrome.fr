@@ -1,0 +1,8 @@
+{
+  "label": "Jenkins",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Jenkins est un outil open source e serveur d'automatisation. Il aide à automatiser les parties du développement logiciel liées au build, aux tests, et au déploiement, et facilite l'intérgation continue et la livraison continue."
+  }
+}
