@@ -4,10 +4,8 @@ pipeline {
     }
     stages {
         stage('Build') {
-            steps {
-              node {
-                ls
-              }
+            node ("build"){
+                les
             }
         }
         stage('Deliver') {
