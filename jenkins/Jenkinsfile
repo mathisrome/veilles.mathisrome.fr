@@ -4,24 +4,12 @@ pipeline {
     }
     stages {
         stage('Build') {
-            steps {
-                sh "git archive --output=app/build.tar.gz --format=tar HEAD ./app"
-                sh "cd app && docker build -t veilles-mathisrome-fr -f Dockerfile.prod ."
-                script {
-                    env.PASSWORD = input message: 'Please enter docker login password', parameters: [password(defaultValue: '', description: '', name: 'Password')]
-                }
-                sh "docker login -u 'mathisrome' -p '${env.PASSWORD}' docker.io"
-                sh "docker tag veilles-mathisrome-fr mathisrome/veilles-mathisrome-fr"
-                sh "docker push mathisrome/veilles-mathisrome-fr"
+            node {
+                ls
             }
         }
         stage('Deliver') {
-            agent {
-                label 'deploy'
-            }
-            steps {
-                sh "docker compose -f docker-compose.prod.yml up -d"
-            }
+
         }
     }
 }
