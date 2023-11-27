@@ -4,12 +4,16 @@ pipeline {
     }
     stages {
         stage('Build') {
-            node {
+            steps {
+              node {
                 ls
+              }
             }
         }
         stage('Deliver') {
-
+            steps {
+                sh "ls"
+            }
         }
     }
 }
