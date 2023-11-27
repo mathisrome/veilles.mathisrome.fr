@@ -6,7 +6,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    cd app
                     def dockerImage = docker.build('veilles-mathisrome-fr', '-f Dockerfile.prod')
                     dockerImage.push()
                 }
