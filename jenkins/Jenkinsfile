@@ -3,16 +3,22 @@ pipeline {
         label 'master'
     }
     stages {
-        node ("build"){
-            ls
-            stage('Build') {
-
+        stage('Build') {
+            steps {
+                script {
+                    cd app
+                    def dockerImage = docker.build('veilles-mathisrome-fr', '-f Dockerfile.prod')
+                    dockerImage.push()
+                }
             }
         }
 
         stage('Deliver') {
+            agent {
+                label 'deploy'
+            }
             steps {
-                sh "ls"
+                sh "docker compose -f docker-compose.prod.yml up -d"
             }
         }
     }
