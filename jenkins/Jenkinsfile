@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('Build') {
             environment {
-                DOCKER_REGISTRY = 'https://registry.hub.docker.com' // URL du registre Docker
-                DOCKER_CREDS = credentials('docker_account')
+                DOCKER_REGISTRY = 'docker.io' // URL du registre Docker
+                DOCKER_CREDS = 'docker_account'
             }
             steps {
                 script {
