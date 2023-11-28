@@ -30,7 +30,9 @@ pipeline {
     post {
         always {
             // Efface les identifiants après utilisation pour des raisons de sécurité
-            docker.image('nom_image:tag').push('-')
+            script {
+                docker.image('nom_image:tag').push('-')
+            }
         }
     }
 }
