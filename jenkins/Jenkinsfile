@@ -4,14 +4,11 @@ pipeline {
     }
     stages {
         stage('Build') {
-            environment {
-                DOCKER_REGISTRY = 'https://registry.hub.docker.com' // URL du registre Docker
-            }
             steps {
                 script {
                     sh "git archive --output=app/build.tar.gz --format=tar HEAD ./app"
                     dir('app') {
-                        dockerImage.withRegistry("${DOCKER_REGISTRY}", 'docker-account') {
+                        dockerImage.withRegistry("'https://registry.hub.docker.com'", 'docker-account') {
                             def dockerImage = docker.build('veilles-mathisrome-fr', '-f Dockerfile.prod .')
                             dockerImage.push()
                         }
