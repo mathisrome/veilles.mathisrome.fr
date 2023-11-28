@@ -6,13 +6,12 @@ pipeline {
         stage('Build') {
             environment {
                 DOCKER_REGISTRY = 'https://registry.hub.docker.com' // URL du registre Docker
-                DOCKER_CREDS = credentials('docker-account')
             }
             steps {
                 script {
                     sh "git archive --output=app/build.tar.gz --format=tar HEAD ./app"
                     dir('app') {
-                        dockerImage.withRegistry("${DOCKER_REGISTRY}", "${DOCKER_CREDS}") {
+                        dockerImage.withRegistry("${DOCKER_REGISTRY}", credentials('docker-account')) {
                             def dockerImage = docker.build('veilles-mathisrome-fr', '-f Dockerfile.prod .')
                             dockerImage.push()
                         }
