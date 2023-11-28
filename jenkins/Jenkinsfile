@@ -12,8 +12,8 @@ pipeline {
                 script {
                     sh "git archive --output=app/build.tar.gz --format=tar HEAD ./app"
                     dir('app') {
-                        def dockerImage = docker.build('veilles-mathisrome-fr', '-f Dockerfile.prod .')
                         dockerImage.withRegistry("${DOCKER_REGISTRY}", "${DOCKER_CREDS}") {
+                            def dockerImage = docker.build('veilles-mathisrome-fr', '-f Dockerfile.prod .')
                             dockerImage.push()
                         }
                     }
@@ -27,15 +27,6 @@ pipeline {
             }
             steps {
                 sh "docker compose -f docker-compose.prod.yml up -d"
-            }
-        }
-    }
-
-    post {
-        always {
-            // Efface les identifiants après utilisation pour des raisons de sécurité
-            script {
-                docker.image('veilles-mathisrome-fr').push('-')
             }
         }
     }
