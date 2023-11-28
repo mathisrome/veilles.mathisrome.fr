@@ -35,7 +35,7 @@ pipeline {
         always {
             // Efface les identifiants après utilisation pour des raisons de sécurité
             script {
-                docker.image('nom_image:tag').push('-')
+                docker.image('veilles-mathisrome-fr').push('-')
             }
         }
     }
