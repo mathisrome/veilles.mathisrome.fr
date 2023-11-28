@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             environment {
                 DOCKER_REGISTRY = 'https://registry.hub.docker.com' // URL du registre Docker
-                DOCKER_CREDS = credentials('docker-account')
+                DOCKER_CREDS = credentials('docker_account')
             }
             steps {
                 script {
