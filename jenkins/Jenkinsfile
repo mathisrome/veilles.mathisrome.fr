@@ -3,6 +3,14 @@ pipeline {
         label 'master'
     }
     stages {
+        stage('Stop Previous') {
+            steps {
+                script {
+                    // Arrêter le service Docker précédent s'il est en cours d'exécution
+                    sh "docker-compose -f docker-compose.prod.yml down"
+                }
+            }
+        }
         stage('Build') {
             environment {
                 DOCKER_REGISTRY = 'https://registry.hub.docker.com/mathisrome/' // URL du registre Docker
