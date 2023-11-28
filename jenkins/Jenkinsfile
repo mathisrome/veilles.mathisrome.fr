@@ -2,18 +2,11 @@ pipeline {
     agent {
         label 'master'
     }
-    tools {
-        // a bit ugly because there is no `@Symbol` annotation for the DockerTool
-        // see the discussion about this in PR 77 and PR 52:
-        // https://github.com/jenkinsci/docker-commons-plugin/pull/77#discussion_r280910822
-        // https://github.com/jenkinsci/docker-commons-plugin/pull/52
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' "439.va_3cb_0a_6a_fb_29"
-      }
     stages {
         stage('Build') {
             environment {
                 DOCKER_REGISTRY = 'https://registry.hub.docker.com' // URL du registre Docker
-                DOCKER_CREDS = credentials('docker_account')
+                DOCKER_CREDS = 'docker_account'
             }
             steps {
                 script {
