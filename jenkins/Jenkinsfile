@@ -4,9 +4,6 @@ pipeline {
     }
     stages {
         stage('Build') {
-            agent {
-                label 'docker-agent'
-            }
             steps {
                 script {
                     sh "git archive --output=app/build.tar.gz --format=tar HEAD ./app"
