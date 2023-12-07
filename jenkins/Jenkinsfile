@@ -31,7 +31,7 @@ pipeline {
                 label 'deploy'
             }
             steps {
-                sh "docker compose pull"
+                sh "docker compose -f docker-compose.prod.yml pull"
                 sh "docker stop veilles-mathisrome-fr-nginx || true && docker rm veilles-mathisrome-fr-nginx || true"
                 sh "docker compose -f docker-compose.prod.yml up -d"
             }
