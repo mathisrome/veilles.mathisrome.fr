@@ -3,6 +3,10 @@ pipeline {
         label 'master'
     }
 
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+     }
+
     stages {
         stage('Build') {
             environment {
