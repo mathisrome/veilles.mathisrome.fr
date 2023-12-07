@@ -130,4 +130,4 @@ docker run --name jenkins-blueocean --restart=on-failure --detach \
 
 :::
 
-C'est juste pour tester quelque chose
+# C'est juste pour tester quelque chose
